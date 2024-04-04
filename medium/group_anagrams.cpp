@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        // time - O(m * n) where m is the lenght of strs vector and n is the average length of the strings in strs
+        // time - O(m * n) where m is the length of strs vector and n is the average length of the strings in strs
         // space - O(m) where is m is the length of the strs vector
         unordered_map<string, vector<string>> res;
         for (string s : strs) {
