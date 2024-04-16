@@ -1,23 +1,49 @@
 class Solution {
+
+// if s.length() != t.length() return false
+// 
 public:
     bool isAnagram(string s, string t) {
-        // base case check the lengths of s and t
-        // O(s + t) time | O(uniqueChars in s)
-        if(s.size() != t.size()) return false;
-        // O(n) time | O(s) space -> n is input size and s is number of unique chars in s
-        // iterate over string s and store the freq of chars in hashmap
-        unordered_map<char,int> freqChars;
-        for(int i = 0; i < s.size(); ++i) {
-            if(freqChars.find(s[i]) == freqChars.end()) freqChars[s[i]] = 0;
-            freqChars[s[i]] += 1;
+        if(s.length() != t.length()) return false;
+        // O(m log m) + O (n log n)
+        // m is the length of the string s
+        // n is the length of the string t 
+        // sort(s.begin(), s.end());
+        // sort(t.begin(), t.end());
+        // return s == t;
+
+
+        // O(s + t) time | O(1) space
+        int freqS[26];
+        // calculating the freq of the chars in s
+        for(int i = 0; i < s.length(); ++i) {
+            freqS[s[i] - 'a']++;
         }
-        // O(n) -> n is input size of t
-        // iterate over string t and check if all the chars with same frequency exist in map
-        for(int i = 0; i < t.size(); ++i) {
-            if(freqChars.find(t[i]) != freqChars.end() && freqChars[t[i]] > 0) freqChars[t[i]] -= 1;
-            else return false;
-        } 
-        // if it does return true else return false
+
+        int freqT[26];
+        // calculating the freq of the chars in t
+        for(int i = 0; i < t.length(); ++i) {
+            freqT[t[i] - 'a']++;
+        }
+
+        for(int i = 0; i < 26; ++i) {
+            if(freqS[i] != freqT[i]) return false;
+        }
         return true;
+
+
+        // use hashmap for input contains unicode characters
+        // unordered_map<char,int> freqCharS;
+        // // O(s) time | O(s) space
+        // for(int i = 0; i < s.length(); ++i) {
+        //     if(freqCharS.find(s[i]) == freqCharS.end()) freqCharS[s[i]] = 0;
+        //     freqCharS[s[i]] += 1;
+        // }
+        // // O(t) time 
+        // for(int i = 0; i < t.length(); ++i) {
+        //     if(freqCharS.find(t[i]) != freqCharS.end() && freqCharS[t[i]] != 0) freqCharS[t[i]] -= 1;
+        //     else return false;
+        // }
+        // return true;
     }
 };
