@@ -2,19 +2,42 @@ class Solution {
 
 public:
     bool containsDuplicate(vector<int>& nums) {
-        // O(n^2) time | O(1) space
-        // for(int i = 0; i < nums.size(); ++i) {
-        //     for(int j = 0; j < nums.size(); ++j) {
-        //         if(i != j && nums[i] == nums[j]) return true;
+        // // O(n^2) time | O(1) space
+        // bool duplicate = false;
+        // for(int i = 0; i < nums.size() - 1; ++i) {
+        //     for(int j = i + 1; j < nums.size(); ++j) {
+        //         if(nums[i] == nums[j]) {
+        //             duplicate = true;
+        //             return duplicate;
+        //         }
         //     }
         // }
-        // return false;
+        // return duplicate;
+
         // O(n) time | O(n) space
-        unordered_set<int> s;
+        // hashmap or dictionary to store the frequency of the elements
+        // iterate over the hashmap and return ture if any element has frequency greater than 1
+        // unordered_map<int,int> freqNums;
+        // O(n)
         for(int i = 0; i < nums.size(); ++i) {
-            if(s.find(nums[i]) != s.end()) return true;
-            else s.insert(nums[i]);
+            if(freqNums.find(nums[i]) == freqNums.end()) freqNums[nums[i]] = 0;
+            freqNums[nums[i]] += 1;
+        }
+
+        // O(n)
+        for(auto itr = freqNums.begin(); itr != freqNums.end(); ++itr) {
+            if(itr->second > 1) return true;
         }
         return false;
+
+        
+        // O(n log n) time | O(1) space
+        // sort the elements and check if any two adjacent elements are same
+        // sort(nums.begin(), nums.end()); // O(n log n)
+        // for(int i = 0; i < nums.size() - 1; ++i) {
+        //     if(nums[i] == nums[i+1]) return true;
+        // }
+        // return false;
+        
     }
 };
